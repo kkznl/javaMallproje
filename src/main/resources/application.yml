@@ -8,7 +8,9 @@ spring:
     username: root
     druid:
       password: 123456
-    url: jdbc:mysql:///productmall?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql:///mallmanager?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    #autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&serverTimezone=UTC
+    #useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     database: 0
@@ -17,11 +19,14 @@ spring:
     timeout: 5000
     lettuce:
       pool:
-        max-active: 8 #×î´óßB½Ó”µ
-        #max-wait: -1 #Ä¬ÈÏ-1 ×î´óÁ¬½Ó×èÈûµÈ´ýÊ±¼ä
-        max-idle: 3 #×î´ó¿ÕÏÐÁ¬½Ó Ä¬ÈÏ8
-        min-idle: 1 #×îÐ¡¿ÕÏÐÁ¬½Ó
+        max-active: 8 #ï¿½ï¿½ï¿½ï¿½Bï¿½Ó”ï¿½
+        #max-wait: -1 #Ä¬ï¿½ï¿½-1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½Ê±ï¿½ï¿½
+        max-idle: 3 #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä¬ï¿½ï¿½8
+        min-idle: 1 #ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #æŸ¥çœ‹mybatisçš„æ‰§è¡Œæ—¥å¿—
+    map-underscore-to-camel-case: true             #é©¼å³°å’Œä¸‹åˆ’çº¿å¯¹åº”
 server:
   port: 8888

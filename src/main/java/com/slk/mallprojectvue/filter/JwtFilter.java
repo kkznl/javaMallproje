@@ -15,7 +15,7 @@ public class JwtFilter implements HandlerInterceptor {
         reqURI = reqURI.substring(reqURI.lastIndexOf("/"));
         System.out.println("前" + reqURI);
         //判断路径是否在允许直接通行的数组中
-        if(Arrays.asList(passPaths).contains(reqURI)){
+        /*if(Arrays.asList(passPaths).contains(reqURI)){
             //在，允许通过
             String jwt = request.getHeader("JWT_HEAD_USER");
             System.out.println(jwt);
@@ -29,8 +29,8 @@ public class JwtFilter implements HandlerInterceptor {
             if(jwt == null){
                 //直接
             }
-        }
-        return false;
+        }*/
+        return true;
     }
 
     @Override

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slk.mallprojectvue.mapper.ManagerMapper">
+    <select id="selectOneManagerByMobile" resultType="com.slk.mallprojectvue.pojo.Manager">
+          select * from sp_manager where mg_name = #{mgName} and mg_pwd = #{mgPwd}
+    </select>
+</mapper>
