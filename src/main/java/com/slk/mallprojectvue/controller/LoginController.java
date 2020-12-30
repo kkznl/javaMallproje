@@ -1,15 +1,16 @@
 package com.slk.mallprojectvue.controller;
 
 import com.slk.mallprojectvue.pojo.Manager;
+import com.slk.mallprojectvue.pojo.User;
 import com.slk.mallprojectvue.service.ManagerService;
 import com.slk.mallprojectvue.service.UserService;
 import com.slk.mallprojectvue.utils.JWTutil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -63,18 +64,55 @@ public class LoginController {
         if("".equals(query)){
             //存放用户
             map.put("users",userService.getSomeUsersByPage(pagesize * (pagenum - 1),pagesize));
+            map.put("totalpage",userService.getTotalUsers());
         }else {
             //模糊查询用户，先空着，等后面视频看了需求再写
-            map.put("users",null);
+            query = "%" + query + "%";
+            map.put("users",userService.getSomeUsersLikeSome(query, pagesize * (pagenum - 1), pagesize));
+            map.put("totalpage",userService.getUsersLikeTotal(query));
         }
         //添加记录总数、当前页、请求状态
         Map<String ,Object> meta = new HashMap<>();
         meta.put("msg","获取成功");
         meta.put("status",200);
         map.put("meta",meta);
-        map.put("totalpage",userService.getTotalUsers());
+
         map.put("pagenum",pagenum);
         //如果不是null，就是模糊查询了
         return  map;
+    }
+
+    //添加一个用户信息
+    @PostMapping("/addUser")
+    @ApiOperation("新增一个用户的信息")
+    public Map addUser(String userName,String password,String email,String mobile){
+        Map<String,Object> map = new HashMap<>();
+        User u = new User();
+        u.setUserName(userName);
+        u.setMobile(mobile);
+        u.setType(1);
+        u.setEmail(email);
+        int time = (int) ((new Date()).getTime());
+        u.setCreatTime(time);
+        u.setStatus(true);
+        u.setRoleName("");
+        u.setPassword(password);
+        System.out.println(u);
+        int flag = userService.addOneUser(u);
+        if(flag > 0){
+            map.put("status",200);
+            map.put("msg","添加成功");
+        }else {
+            map.put("status",500);
+            map.put("msg","添加失败");
+        }
+        return map;
+    }
+
+    //根据id删除一个用户
+    @GetMapping("/deleteUser")
+    @ApiOperation("根据id，删除一个用户")
+    public Integer deleteUser(Integer id){
+        return userService.dropOneUserById(id);
     }
 }

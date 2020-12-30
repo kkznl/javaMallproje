@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.slk.mallprojectvue.mapper.UserMapper">
+    <!--selectSomeUsersByPage-->
     <select id="selectSomeUsersByPage" resultType="com.slk.mallprojectvue.pojo.User">
           select * from sp_users order by id limit #{sizeNow},#{pageSize}
     </select>
+    <!--selectTotalUsers-->
     <select id="selectTotalUsers" resultType="java.lang.Integer">
           select count(*) from sp_users
+    </select>
+
+    <!--selectUsersLikesSome-->
+    <select id="selectUsersLikesSome" resultType="com.slk.mallprojectvue.pojo.User">
+          select * from sp_users where user_name like #{query} order by id   limit #{sizeNow},#{pageSize}
+    </select>
+
+    <!--selectTotalUsersLikesSome-->
+    <select id="selectTotalUsersLikesSome" resultType="java.lang.Integer">
+          select count(*) from sp_users where user_name like #{query}
+    </select>
+
+    <!--insertOneUser-->
+    <insert id="insertOneUser" parameterType="com.slk.mallprojectvue.pojo.User">
+          insert  into sp_users(user_name,mobile,type,email,creat_time,status,role_name,password) values (#{userName},#{mobile},#{type},#{email},#{creatTime},#{status},#{roleName},#{password})
+    </insert>
+
+    <!--deleteOneUserById-->
+    <delete id="deleteOneUserById">
+          delete from sp_users where id = #{id}
+    </delete>
+
+    <!--selectOneUserByName-->
+    <select id="selectOneUserByName" resultType="com.slk.mallprojectvue.pojo.User">
+          select * from sp_users where user_name = #{name}
     </select>
 </mapper>

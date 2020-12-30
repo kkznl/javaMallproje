@@ -24,4 +24,29 @@ public class UserServiceImpl implements UserService {
     public Integer getTotalUsers() {
         return userMapper.selectTotalUsers();
     }
+
+    @Override
+    public ArrayList<User> getSomeUsersLikeSome(String query, Integer sizeNow, Integer pageSize) {
+        return userMapper.selectUsersLikesSome(query,sizeNow,pageSize);
+    }
+
+    @Override
+    public Integer getUsersLikeTotal(String query) {
+        return userMapper.selectTotalUsersLikesSome(query);
+    }
+
+
+    @Override
+    public Integer addOneUser(User user) {
+        return userMapper.insertOneUser(user);
+    }
+    @Override
+    public Integer dropOneUserById(Integer id) {
+        return userMapper.deleteOneUserById(id);
+    }
+
+    @Override
+    public User getOneUserByName(String name) {
+        return userMapper.selectOneUserByName(name);
+    }
 }
