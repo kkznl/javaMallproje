@@ -1,6 +1,7 @@
 package com.slk.mallprojectvue.mapper;
 
 import com.slk.mallprojectvue.pojo.User;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
 
@@ -20,4 +21,10 @@ public interface UserMapper {
     public Integer deleteOneUserById(Integer id);
     //根据用户名，搜索用户
     public User selectOneUserByName(String name );
+    //更新用户信息
+    public Integer updateOneUserById(Integer id,String email,String mobile);
+    //更改用户状态
+    public Integer updateOneUserStatusById(Integer id, Boolean status);
+    //更改用户权限
+    public Integer updateOneUserRoleById(Integer id,Integer roleId);
 }

@@ -13,9 +13,10 @@ public class User {
     private String mobile;
     private Integer type;
     private String email;
-    private Integer creatTime;
+    private Long creatTime;
     private Boolean status;
     private String roleName;
     private String password;
+    private Integer roleId;
 
 }

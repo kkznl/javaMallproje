@@ -1,6 +1,7 @@
 package com.slk.mallprojectvue.service;
 
 import com.slk.mallprojectvue.pojo.User;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
 
@@ -27,4 +28,13 @@ public interface UserService {
 
     //用户名搜索用户
     public User getOneUserByName(String name);
+
+    //更新用户信息
+    public Integer setNewUserById(Integer id,String email,String mobile);
+
+    //更新用户状态
+    public Integer setNewUserStatusById(Integer id, Boolean status);
+
+    //修改用户权限
+    public Integer setNewUserRoleById(Integer id,Integer roleId);
 }

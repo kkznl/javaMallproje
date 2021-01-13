@@ -92,11 +92,11 @@ public class LoginController {
         u.setMobile(mobile);
         u.setType(1);
         u.setEmail(email);
-        int time = (int) ((new Date()).getTime());
-        u.setCreatTime(time);
+        u.setCreatTime((new Date()).getTime());
         u.setStatus(true);
         u.setRoleName("");
         u.setPassword(password);
+        u.setRoleId(42);   //42是默认权限id
         System.out.println(u);
         int flag = userService.addOneUser(u);
         if(flag > 0){
@@ -115,4 +115,19 @@ public class LoginController {
     public Integer deleteUser(Integer id){
         return userService.dropOneUserById(id);
     }
+
+    //更新用户
+    @GetMapping("/updateUser")
+    @ApiOperation("更新用户信息")
+    public Integer updateUser(Integer id,String email,String mobile){
+        return userService.setNewUserById(id, email, mobile);
+    }
+
+    //更新用户状态
+    @GetMapping("/updateUserStatus")
+    @ApiOperation("更新用户状态")
+    public Integer updateUserStatus(Integer id,Boolean status){
+        return userService.setNewUserStatusById(id, status);
+    }
+
 }

@@ -22,7 +22,7 @@
 
     <!--insertOneUser-->
     <insert id="insertOneUser" parameterType="com.slk.mallprojectvue.pojo.User">
-          insert  into sp_users(user_name,mobile,type,email,creat_time,status,role_name,password) values (#{userName},#{mobile},#{type},#{email},#{creatTime},#{status},#{roleName},#{password})
+          insert  into sp_users(user_name,mobile,type,email,creat_time,status,role_name,password,role_id) values (#{userName},#{mobile},#{type},#{email},#{creatTime},#{status},#{roleName},#{password},#{roleId})
     </insert>
 
     <!--deleteOneUserById-->
@@ -34,4 +34,19 @@
     <select id="selectOneUserByName" resultType="com.slk.mallprojectvue.pojo.User">
           select * from sp_users where user_name = #{name}
     </select>
+
+    <!--updateOneUserById-->
+    <update id="updateOneUserById">
+        update sp_users set email = #{email},mobile = #{mobile} where id = #{id}
+    </update>
+
+    <!--updateOneUserStatusById-->
+    <update id="updateOneUserStatusById">
+        update sp_users set status = #{status} where id = #{id}
+    </update>
+
+    <!--updateOneUserRoleById-->
+    <update id="updateOneUserRoleById">
+        update sp_users set role_id = #{roleId} where id = #{id}
+    </update>
 </mapper>
